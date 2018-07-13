@@ -1,0 +1,33 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Retrieve hosts file.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>dbc06180-c832-472c-80eb-8340ca055d7e</id>
+    <loglevel>INFO</loglevel>
+    <name>Get hosts file</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>powershell.exe -Command get-content C:\Windows\system32\drivers\etc\hosts</exec>
+      </command>
+    </sequence>
+    <uuid>dbc06180-c832-472c-80eb-8340ca055d7e</uuid>
+  </job>
+</joblist>

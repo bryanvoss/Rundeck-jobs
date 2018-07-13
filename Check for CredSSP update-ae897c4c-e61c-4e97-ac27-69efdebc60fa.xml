@@ -1,0 +1,34 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' required='true' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Check to see if CredSSP update (KB4103718 for 2008R2 SP1 x64 (rollup)) has been applied.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>5</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>ae897c4c-e61c-4e97-ac27-69efdebc60fa</id>
+    <loglevel>INFO</loglevel>
+    <name>Check for CredSSP update</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>false</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Check for KB4103718.</description>
+        <exec>powershell.exe -Command Get-HotFix -Id 'KB4103718'</exec>
+      </command>
+    </sequence>
+    <uuid>ae897c4c-e61c-4e97-ac27-69efdebc60fa</uuid>
+  </job>
+</joblist>

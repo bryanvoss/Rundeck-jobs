@@ -1,0 +1,33 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Retrieve Tire Power GUID from registry.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>99799464-ebb5-4d4d-84ea-40228afbf02b</id>
+    <loglevel>INFO</loglevel>
+    <name>Get Tire Power GUID</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>powershell.exe -Command (get-itemproperty -path '''HKLM:\SOFTWARE\Wow6432Node\Tire Company Solutions\Connect''' GUID).GUID</exec>
+      </command>
+    </sequence>
+    <uuid>99799464-ebb5-4d4d-84ea-40228afbf02b</uuid>
+  </job>
+</joblist>

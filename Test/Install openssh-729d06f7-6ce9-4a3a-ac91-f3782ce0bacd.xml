@@ -1,0 +1,29 @@
+<joblist>
+  <job>
+    <description>Install openssh and set up as a service.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Test</group>
+    <id>729d06f7-6ce9-4a3a-ac91-f3782ce0bacd</id>
+    <loglevel>INFO</loglevel>
+    <name>Install openssh</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_Bryan_TN</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>cyg-get openssh cygrunsrv</exec>
+      </command>
+    </sequence>
+    <uuid>729d06f7-6ce9-4a3a-ac91-f3782ce0bacd</uuid>
+  </job>
+</joblist>

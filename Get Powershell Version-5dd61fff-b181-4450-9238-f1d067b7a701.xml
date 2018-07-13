@@ -1,0 +1,33 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Check which version of Powershell is installed.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>5dd61fff-b181-4450-9238-f1d067b7a701</id>
+    <loglevel>INFO</loglevel>
+    <name>Get Powershell Version</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>false</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>powershell.exe -Command $PSVersionTable.PSVersion</exec>
+      </command>
+    </sequence>
+    <uuid>5dd61fff-b181-4450-9238-f1d067b7a701</uuid>
+  </job>
+</joblist>

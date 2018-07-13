@@ -1,0 +1,86 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' required='true' secure='true' value='1997-=callmojo' />
+      </options>
+    </context>
+    <description><![CDATA[Check WSUS for available Windows Updates and install immediately.
+
+Will reboot node if updates require it. Plan execution time accordingly.
+
+Source: http://searchwindowsserver.techtarget.com/tip/Install-WSUS-updates-immediately-with-Windows-PowerShell]]></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Test</group>
+    <id>0b0478c6-73b0-43a9-ad9c-d9dadc253c95</id>
+    <loglevel>INFO</loglevel>
+    <name>WSUS: Install updates now</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_Bryan_TN</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email attachLog='true' recipients='bvoss@tcstire.com' subject='Rundeck: WSUS: Install updates now (FAIL)' />
+      </onfailure>
+      <onstart>
+        <email recipients='bvoss@tcstire.com' subject='Rundeck: WSUS: Install updates now (START)' />
+      </onstart>
+      <onsuccess>
+        <email attachLog='true' recipients='bvoss@tcstire.com' subject='Rundeck: WSUS: Install updates now (SUCCESS)' />
+      </onsuccess>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <fileExtension>.ps1</fileExtension>
+        <script><![CDATA[#Define update criteria.
+
+$Criteria = "IsInstalled=0 and Type='Software'"
+
+
+#Search for relevant updates.
+
+$Searcher = New-Object -ComObject Microsoft.Update.Searcher
+
+$SearchResult = $Searcher.Search($Criteria).Updates
+
+
+#Download updates.
+
+$Session = New-Object -ComObject Microsoft.Update.Session
+
+$Downloader = $Session.CreateUpdateDownloader()
+
+$Downloader.Updates = $SearchResult
+
+$Downloader.Download()
+
+
+#Install updates.
+
+$Installer = New-Object -ComObject Microsoft.Update.Installer
+
+$Installer.Updates = $SearchResult
+
+$Result = $Installer.Install()
+
+
+#Reboot if required by updates.
+
+If ($Result.rebootRequired) { shutdown.exe /t 0 /r }]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <timeout>3h</timeout>
+    <uuid>0b0478c6-73b0-43a9-ad9c-d9dadc253c95</uuid>
+  </job>
+</joblist>

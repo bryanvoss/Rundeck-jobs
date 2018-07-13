@@ -1,0 +1,38 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Retrieve info about disks from remote Windows node.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>0bfa5236-33a4-4f9b-a13a-20844f2121c7</id>
+    <loglevel>INFO</loglevel>
+    <name>Get disk info</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>tags: hosted_tp</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email attachLog='true' recipients='bvoss@tcstire.com' subject='Rundeck: Get disk info (FAILURE)' />
+      </onfailure>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>wmic LOGICALDISK LIST BRIEF</exec>
+      </command>
+    </sequence>
+    <uuid>0bfa5236-33a4-4f9b-a13a-20844f2121c7</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,56 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Disable checks for Windows Updates.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>9c2ada14-bacd-40fa-9f48-af46091db526</id>
+    <loglevel>INFO</loglevel>
+    <name>Disable Automatic Updates</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Disable Automatic Updates (FAIL)' />
+      </onfailure>
+      <onstart>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Disable Automatic Updates (START)' />
+      </onstart>
+      <onsuccess>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Disable Automatic Updates (SUCCESS)' />
+      </onsuccess>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Stop Windows Update service.</description>
+        <errorhandler keepgoingOnSuccess='true'>
+          <exec>echo """Windows Update service was not running."""</exec>
+        </errorhandler>
+        <exec>net stop """Windows Update"""</exec>
+      </command>
+      <command>
+        <description>Disable checks.</description>
+        <exec>reg add """HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update""" /v AUOptions /t REG_DWORD /d 00000001 /f</exec>
+      </command>
+      <command>
+        <description>Start Windows Update service.</description>
+        <exec>net start """Windows Update"""</exec>
+      </command>
+    </sequence>
+    <uuid>9c2ada14-bacd-40fa-9f48-af46091db526</uuid>
+  </job>
+</joblist>

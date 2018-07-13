@@ -1,0 +1,46 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' value='1997-=callmojo' />
+      </options>
+    </context>
+    <description>Download and install chocolatey.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Test</group>
+    <id>18ab60cd-996b-4016-bead-9e40850bf778</id>
+    <loglevel>INFO</loglevel>
+    <name>Install chocolatey</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_Bryan_TN</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email attachLog='true' recipients='bvoss@tcstire.com' subject='Rundeck: Install chocolatey (FAIL)' />
+      </onfailure>
+      <onstart>
+        <email recipients='bvoss@tcstire.com' subject='Rundeck: Install chocolatey (START)' />
+      </onstart>
+      <onsuccess>
+        <email attachLog='true' recipients='bvoss@tcstire.com' subject='Rundeck: Install chocolatey (SUCCESS)' />
+      </onsuccess>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" &amp;&amp; SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin</exec>
+      </command>
+    </sequence>
+    <timeout>15m</timeout>
+    <uuid>18ab60cd-996b-4016-bead-9e40850bf778</uuid>
+  </job>
+</joblist>

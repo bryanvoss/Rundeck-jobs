@@ -1,0 +1,34 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Retrieve list of installed apps from remote Windows node.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>25</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>b5e05339-72d1-445a-9f99-1c0443489e55</id>
+    <loglevel>INFO</loglevel>
+    <name>Get installed apps</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>tags: hosted_tp</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>wmic product get</exec>
+      </command>
+    </sequence>
+    <timeout>15m</timeout>
+    <uuid>b5e05339-72d1-445a-9f99-1c0443489e55</uuid>
+  </job>
+</joblist>

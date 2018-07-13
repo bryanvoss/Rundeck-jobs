@@ -1,0 +1,79 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Get a list of currently-logged-in users.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>35b51678-0e7c-4cd7-b1cc-9934a0d02899</id>
+    <loglevel>INFO</loglevel>
+    <name>Get current users</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>false</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>echo "$explorerprocesses = @(Get-WmiObject -Query 'Select * FROM Win32_Process WHERE Name=''explorer.exe''' -ErrorAction SilentlyContinue)" &gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "If ($explorerprocesses.Count -eq 0)" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "{" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "    'No explorer process found / Nobody interactively logged on'" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "}" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "Else" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "{" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "    ForEach ($i in $explorerprocesses)" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "    {" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "        $Username = $i.GetOwner().User" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "        $Domain = $i.GetOwner().Domain" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "        Write-Host ''$Domain\$Username logged on since: $($i.ConvertToDateTime($i.CreationDate))''" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "    }" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>echo "}" &gt;&gt; C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <description>Execute script</description>
+        <exec>powershell.exe -Command C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+      <command>
+        <exec>del C:\Users\tcstirepower\Documents\Get_current_users.ps1</exec>
+      </command>
+    </sequence>
+    <uuid>35b51678-0e7c-4cd7-b1cc-9934a0d02899</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,44 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>2bc58f06-a82c-4449-a5f6-3726f9db7b88</id>
+    <loglevel>INFO</loglevel>
+    <name>Reboot computer</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>false</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck job: Reboot computer: FAIL' />
+      </onfailure>
+      <onstart>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck job: Reboot computer: STARTED' />
+      </onstart>
+      <onsuccess>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck job: Reboot computer: SUCCESS' />
+      </onsuccess>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>powershell.exe -Command restart-computer -Force</exec>
+      </command>
+    </sequence>
+    <uuid>2bc58f06-a82c-4449-a5f6-3726f9db7b88</uuid>
+  </job>
+</joblist>

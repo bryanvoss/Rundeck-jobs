@@ -1,0 +1,39 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' required='true' secure='true' value='1997-=callmojo' />
+      </options>
+    </context>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Test</group>
+    <id>1889b43c-f12a-424e-902d-8a8a7ac164f5</id>
+    <loglevel>INFO</loglevel>
+    <name>Get latest errors from Application log</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_Bryan_TN</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <fileExtension>.ps1</fileExtension>
+        <script><![CDATA[Clear-Host
+Get-EventLog application -Newest 20 |
+	Where-Object {$_.entryType -match "Error"}]]></script>
+        <scriptargs />
+        <scriptinterpreter>@powershell -NoProfile -ExecutionPolicy unrestricted</scriptinterpreter>
+      </command>
+    </sequence>
+    <uuid>1889b43c-f12a-424e-902d-8a8a7ac164f5</uuid>
+  </job>
+</joblist>

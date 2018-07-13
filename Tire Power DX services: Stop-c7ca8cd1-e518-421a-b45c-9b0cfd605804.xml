@@ -1,0 +1,54 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Stop Tire Power DX services (DX, Price Calc, Price Sync).</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>c7ca8cd1-e518-421a-b45c-9b0cfd605804</id>
+    <loglevel>INFO</loglevel>
+    <name>Tire Power DX services: Stop</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>tags: hosted_tp</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Stop DX</description>
+        <exec>wmic service where name="TirePowerDataService" call stopservice</exec>
+      </command>
+      <command>
+        <description>Kill dxserver.exe if it's still running.</description>
+        <exec>wmic process where name="dxserver.exe" call terminate</exec>
+      </command>
+      <command>
+        <description>Stop PriceCalc</description>
+        <exec>wmic service where name="TirePowerPriceCalc" call stopservice</exec>
+      </command>
+      <command>
+        <description>Kill dxpricecalc.exe if it's still running.</description>
+        <exec>wmic process where name="dxpricecalc.exe" call terminate</exec>
+      </command>
+      <command>
+        <description>Stop PriceSync</description>
+        <exec>wmic service where name="TirePowerPriceSync" call stopservice</exec>
+      </command>
+      <command>
+        <description>Kill dxpricesync.exe if it's still running.</description>
+        <exec>wmic process where name="dxpricesync.exe" call terminate</exec>
+      </command>
+    </sequence>
+    <uuid>c7ca8cd1-e518-421a-b45c-9b0cfd605804</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,38 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Retrieve the date &amp; time a VM was last booted.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>45723676-724e-4306-8a7d-f6c13389443a</id>
+    <loglevel>INFO</loglevel>
+    <name>Get last boot time</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email recipients='bvoss@tcstire.com' subject='Rundeck: Get last boot time (FAIL)' />
+      </onfailure>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>powershell -command "[Management.ManagementDateTimeConverter]::ToDateTime( (gwmi Win32_OperatingSystem).LastBootUpTime )"</exec>
+      </command>
+    </sequence>
+    <uuid>45723676-724e-4306-8a7d-f6c13389443a</uuid>
+  </job>
+</joblist>

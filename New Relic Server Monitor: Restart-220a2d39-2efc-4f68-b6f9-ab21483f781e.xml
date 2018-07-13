@@ -1,0 +1,50 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' value='1997-=callmojo' />
+      </options>
+    </context>
+    <description>Restart New Relic Server Monitor service.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>220a2d39-2efc-4f68-b6f9-ab21483f781e</id>
+    <loglevel>INFO</loglevel>
+    <name>New Relic Server Monitor: Restart</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>tags: hosted_tp</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Tire Power DX services: Restart (FAIL)' />
+      </onfailure>
+      <onstart>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Tire Power DX services: Restart (START)' />
+      </onstart>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Stop service</description>
+        <exec>wmic service where name="nrsvrmon" call stopservice</exec>
+      </command>
+      <command>
+        <description>Kill NewRelic.ServerMonitor.exe if it's still running.</description>
+        <exec>wmic process where name="NewRelic.ServerMonitor.exe" call terminate</exec>
+      </command>
+      <command>
+        <description>Start service</description>
+        <exec>wmic service where name="nrsvrmon" call startservice</exec>
+      </command>
+    </sequence>
+    <uuid>220a2d39-2efc-4f68-b6f9-ab21483f781e</uuid>
+  </job>
+</joblist>

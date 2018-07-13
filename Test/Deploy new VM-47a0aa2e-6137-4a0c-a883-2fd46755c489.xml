@@ -1,0 +1,58 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option enforcedvalues='true' name='VMHost' required='true' values='esx1.tcsgeeks.com,esx2.tcsgeeks.com,esx3.tcsgeeks.com,esx4.tcsgeeks.com,esx5.tcsgeeks.com,esx6.tcsgeeks.com'>
+          <description>Specify the host to place the VM on. Pick the least-loaded host based on stats from vCenter.</description>
+        </option>
+        <option name='VMName' required='true'>
+          <description><![CDATA[Format: TP\_Customer\_State  
+Example: TP\_Test\_TN  
+Name should not exceed 15 characters.]]></description>
+        </option>
+        <option name='winrmPassword' required='true' secure='true' />
+      </options>
+    </context>
+    <description>Deploy a new customer VM.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Test</group>
+    <id>47a0aa2e-6137-4a0c-a883-2fd46755c489</id>
+    <loglevel>INFO</loglevel>
+    <name>Deploy new VM</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>vmware.tcsgeeks.com</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email attachLog='true' recipients='bvoss@tcstire.com' subject='Rundeck: Deploy new VM (FAIL)' />
+      </onfailure>
+      <onstart>
+        <email recipients='bvoss@tcstire.com' subject='Rundeck: Deploy new VM (START)' />
+      </onstart>
+      <onsuccess>
+        <email attachLog='true' recipients='bvoss@tcstire.com' subject='Rundeck: Deploy new VM (SUCCESS)' />
+      </onsuccess>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='step-first'>
+      <command>
+        <description>Deploy VM from template and start.</description>
+        <script><![CDATA[$Datastore = get-datastore -Name NMBLTP* | sort-object -Property FreeSpaceGB -Descending | select-object -First 1
+new-vm -Name @option.VMName@ -VMHost @option.VMHost@ -Template TP_Win_Server_2008_R2_Template_2 -Datastore $Datastore -Location "TP hosted"
+start-vm -VM @option.VMName@]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <timeout>30m</timeout>
+    <uuid>47a0aa2e-6137-4a0c-a883-2fd46755c489</uuid>
+  </job>
+</joblist>

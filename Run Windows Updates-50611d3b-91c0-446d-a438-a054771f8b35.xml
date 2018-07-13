@@ -1,0 +1,43 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' required='true' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Run Windows Updates and reboot if necessary.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>50611d3b-91c0-446d-a438-a054771f8b35</id>
+    <loglevel>INFO</loglevel>
+    <name>Run Windows Updates</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>false</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Create WindowsUpdate directory if it doesn't exist.</description>
+        <exec>powershell.exe -Command New-Item -Force -ItemType directory -Path C:\Temp\WindowsUpdate</exec>
+      </command>
+      <command>
+        <description>Download script.</description>
+        <exec>powershell.exe -Command $WebClient = New-Object System.Net.WebClient ; $WebClient.DownloadFile("""http://10.1.10.19/TPHosted/WindowsUpdate/Invoke-WindowsUpdate.ps1""","""C:\Temp\WindowsUpdate\Invoke-WindowsUpdate.ps1""")</exec>
+      </command>
+      <command>
+        <description>Run update script.</description>
+        <exec>powershell.exe -Command Start-Process powershell.exe C:\Temp\WindowsUpdate\Invoke-WindowsUpdate.ps1</exec>
+      </command>
+    </sequence>
+    <timeout>3h</timeout>
+    <uuid>50611d3b-91c0-446d-a438-a054771f8b35</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,53 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Restart Print Spooler service on all Hosted VMs.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Scheduled Jobs</group>
+    <id>68c8a547-9286-46e6-aff7-efe13de8d045</id>
+    <loglevel>INFO</loglevel>
+    <name>Print Spooler service: daily restart - All Hosted VMs</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck job FAIL: Restart Print Spooler - All Hosted VMs' />
+      </onfailure>
+      <onsuccess>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck job SUCCESS: Restart Print Spooler - All Hosted VMs' />
+      </onsuccess>
+    </notification>
+    <schedule>
+      <month month='*' />
+      <time hour='02' minute='00' seconds='0' />
+      <weekday day='*' />
+      <year year='*' />
+    </schedule>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Stop</description>
+        <exec>wmic service where name="Spooler" call stopservice</exec>
+      </command>
+      <command>
+        <description>Start</description>
+        <exec>wmic service where name="Spooler" call startservice</exec>
+      </command>
+    </sequence>
+    <uuid>68c8a547-9286-46e6-aff7-efe13de8d045</uuid>
+  </job>
+</joblist>

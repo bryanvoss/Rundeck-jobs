@@ -1,0 +1,36 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' required='true' secure='true' value='1997-=callmojo' />
+      </options>
+    </context>
+    <description>Configure time service for ntp.org pool.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>89cc6fa4-8604-4ec4-a120-ee350e78fa76</id>
+    <loglevel>INFO</loglevel>
+    <name>Configure NTP</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>w32tm /config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"</exec>
+      </command>
+      <command>
+        <exec>w32tm /config /update</exec>
+      </command>
+    </sequence>
+    <uuid>89cc6fa4-8604-4ec4-a120-ee350e78fa76</uuid>
+  </job>
+</joblist>

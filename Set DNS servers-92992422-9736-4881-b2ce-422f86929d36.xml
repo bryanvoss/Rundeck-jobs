@@ -1,0 +1,38 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>92992422-9736-4881-b2ce-422f86929d36</id>
+    <loglevel>INFO</loglevel>
+    <name>Set DNS servers</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>tags: hosted_tp</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Set DNS1</description>
+        <exec>netsh interface ip set dns name="Local Area Connection 4" static 10.1.8.101</exec>
+      </command>
+      <command>
+        <description>Set DNS2</description>
+        <exec>netsh interface ip add dns name="Local Area Connection 4" 10.1.8.102 index=2</exec>
+      </command>
+    </sequence>
+    <uuid>92992422-9736-4881-b2ce-422f86929d36</uuid>
+  </job>
+</joblist>

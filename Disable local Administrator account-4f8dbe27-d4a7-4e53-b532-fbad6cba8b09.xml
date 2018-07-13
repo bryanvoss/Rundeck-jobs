@@ -1,0 +1,45 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>4f8dbe27-d4a7-4e53-b532-fbad6cba8b09</id>
+    <loglevel>INFO</loglevel>
+    <name>Disable local Administrator account</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>false</nodesSelectedByDefault>
+    <notification>
+      <onfailure>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Disable Automatic Updates (FAIL)' />
+      </onfailure>
+      <onstart>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Disable Automatic Updates (START)' />
+      </onstart>
+      <onsuccess>
+        <email recipients='bryan.voss@tcstire.com' subject='Rundeck: Disable Automatic Updates (SUCCESS)' />
+      </onsuccess>
+    </notification>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Disable Administrator account</description>
+        <exec>net user administrator /active:no</exec>
+      </command>
+    </sequence>
+    <uuid>4f8dbe27-d4a7-4e53-b532-fbad6cba8b09</uuid>
+  </job>
+</joblist>

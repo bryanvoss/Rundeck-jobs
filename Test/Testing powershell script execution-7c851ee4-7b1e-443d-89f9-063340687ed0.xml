@@ -1,0 +1,34 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' required='true' secure='true' value='1997-=callmojo' />
+      </options>
+    </context>
+    <description>test</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Test</group>
+    <id>7c851ee4-7b1e-443d-89f9-063340687ed0</id>
+    <loglevel>INFO</loglevel>
+    <name>Testing powershell script execution</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_Bryan_TN</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>@powershell -NoProfile -ExecutionPolicy unrestricted -Command "echo $env:computername"</exec>
+      </command>
+    </sequence>
+    <uuid>7c851ee4-7b1e-443d-89f9-063340687ed0</uuid>
+  </job>
+</joblist>

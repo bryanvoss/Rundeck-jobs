@@ -1,0 +1,34 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>List services configured to logon as local Administrator.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>ba77a1f1-2d97-46f5-8053-ea781d21554d</id>
+    <loglevel>INFO</loglevel>
+    <name>Check for services using Administrator logon</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>false</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Check services</description>
+        <exec>wmic service get name,startname | findstr """Administrator"""</exec>
+      </command>
+    </sequence>
+    <uuid>ba77a1f1-2d97-46f5-8053-ea781d21554d</uuid>
+  </job>
+</joblist>

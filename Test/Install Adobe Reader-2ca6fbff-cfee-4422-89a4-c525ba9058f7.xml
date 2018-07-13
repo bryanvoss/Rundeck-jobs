@@ -1,0 +1,40 @@
+<joblist>
+  <job>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <group>Test</group>
+    <id>2ca6fbff-cfee-4422-89a4-c525ba9058f7</id>
+    <loglevel>INFO</loglevel>
+    <name>Install Adobe Reader</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_Bryan_TN</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Copy installer.</description>
+        <node-step-plugin type='copyfile'>
+          <configuration>
+            <entry key='destinationPath' value='/cygdrive/c/Windows/Temp/' />
+            <entry key='echo' value='true' />
+            <entry key='sourcePath' value='/var/rundeck/projects/Hosted_Tire_Power/files/AcroRdrDC1501020060_en_US.exe' />
+          </configuration>
+        </node-step-plugin>
+      </command>
+      <command>
+        <description>Execute installer.</description>
+        <exec>C:\Windows\Temp\AcroRdrDC1501020060_en_US.exe</exec>
+      </command>
+    </sequence>
+    <uuid>2ca6fbff-cfee-4422-89a4-c525ba9058f7</uuid>
+  </job>
+</joblist>

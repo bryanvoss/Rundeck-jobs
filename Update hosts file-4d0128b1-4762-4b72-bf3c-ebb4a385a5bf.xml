@@ -1,0 +1,62 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>4d0128b1-4762-4b72-bf3c-ebb4a385a5bf</id>
+    <loglevel>INFO</loglevel>
+    <name>Update hosts file</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>Create hosts file</description>
+        <exec>echo  "# DO NOT EDIT" &gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+      <command>
+        <description>Add line to hosts file</description>
+        <exec>echo "# This file is maintained by Rundeck and will be overwritten." &gt;&gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+      <command>
+        <description>Add line to hosts file</description>
+        <exec>echo "# Talk to Bryan Voss if you have questions or need to make changes to this file." &gt;&gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+      <command>
+        <description>Add blank line to hosts file</description>
+        <exec>echo. &gt;&gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+      <command>
+        <description>Add line to hosts file</description>
+        <exec>echo "10.1.10.114 ftp.tcstire.com" &gt;&gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+      <command>
+        <description>Add line to hosts file</description>
+        <exec>echo "10.1.10.135 TP_Hosted_SQL" &gt;&gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+      <command>
+        <description>Add line to hosts file</description>
+        <exec>echo "10.1.10.46 slcdtpsql01" &gt;&gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+      <command>
+        <description>Add line to hosts file</description>
+        <exec>echo "10.1.10.49 tpmq.tcstire.com" &gt;&gt; C:\Windows\System32\drivers\etc\hosts</exec>
+      </command>
+    </sequence>
+    <uuid>4d0128b1-4762-4b72-bf3c-ebb4a385a5bf</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,33 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Retrieve the number one memory-consuming process.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>100</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>281dc74c-c04c-477e-b5bd-8be99aae6954</id>
+    <loglevel>INFO</loglevel>
+    <name>Get top memory-consuming process</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>powershell.exe -Command """Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 1 | Select-Object Name,@{Name='WorkingSet';Expression={($_.WorkingSet64/1KB)}}"""</exec>
+      </command>
+    </sequence>
+    <uuid>281dc74c-c04c-477e-b5bd-8be99aae6954</uuid>
+  </job>
+</joblist>

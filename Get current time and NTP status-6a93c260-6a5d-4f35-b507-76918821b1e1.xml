@@ -1,0 +1,36 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='winrmPassword' secure='true' storagePath='keys/projects/Hosted_Tire_Power/tcstirepower' />
+      </options>
+    </context>
+    <description>Retrieve time and w32tm service config.</description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>true</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>6a93c260-6a5d-4f35-b507-76918821b1e1</id>
+    <loglevel>INFO</loglevel>
+    <name>Get current time and NTP status</name>
+    <nodeFilterEditable>true</nodeFilterEditable>
+    <nodefilters>
+      <filter>TP_.*</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>powershell.exe -Command date</exec>
+      </command>
+      <command>
+        <exec>powershell.exe -Command w32tm /query /status</exec>
+      </command>
+    </sequence>
+    <uuid>6a93c260-6a5d-4f35-b507-76918821b1e1</uuid>
+  </job>
+</joblist>
